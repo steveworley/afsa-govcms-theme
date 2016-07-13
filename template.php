@@ -132,4 +132,6 @@ function STARTERKIT_preprocess_block(&$variables, $hook) {
 // */
 
 function afsa_theme_js_alter(&$javascript) {
+  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.2.1.4.min.js';
+  $javascript['misc/jquery.js']['version'] = '2.1.4';
 }
