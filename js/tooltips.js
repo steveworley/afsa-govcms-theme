@@ -12,7 +12,7 @@
   Drupal.behaviors.afsa_tooltips = {
     attach: function(context, settings) {
       // Determine the API path.
-      let url = window.location.origin + settings.basePath + 'api/glossary/xml';
+      let url = window.location.origin + settings.basePath + 'glossary.xml';
 
       $('sup a', context).tooltipster({
         content: 'Loading...',
