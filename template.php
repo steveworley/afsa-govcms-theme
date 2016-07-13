@@ -130,3 +130,6 @@ function STARTERKIT_preprocess_block(&$variables, $hook) {
   //}
 }
 // */
+
+function afsa_theme_js_alter(&$javascript) {
+}

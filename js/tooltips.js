@@ -12,7 +12,7 @@
   Drupal.behaviors.afsa_tooltips = {
     attach: function(context, settings) {
       // Determine the API path.
-      let url = window.location.origin + settings.basePath + 'api/glossary.json';
+      let url = window.location.origin + settings.basePath + 'api/glossary/xml';
 
       $('sup a', context).tooltipster({
         content: 'Loading...',
@@ -41,16 +41,15 @@
             title = $origin.attr('name');
           }
 
-          window.x = $origin;
-
           // Perform an AJAX request to the compiled URL.
           $.get(url + '?title=' + title, function(data) {
+            let $data = $(data);
             $origin.data('loaded', true);
 
-            if (typeof data[0] === 'undefined' || typeof data[0].body === 'undefined') {
-              instance.content('Unable to find more information for ' + title);
+            if ($data.find('item:first')) {
+              instance.content($data.find('item:first').find('description').text());
             } else {
-              instance.content(data[0].body);
+              instance.content('Unable to find more information for ' + title);
             }
           });
         }
