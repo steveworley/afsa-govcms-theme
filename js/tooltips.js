@@ -46,10 +46,10 @@
             let $data = $(data);
             $origin.data('loaded', true);
 
-            if ($data.find('item:first')) {
+            if ($data.find('item:first').length > 0) {
               instance.content($data.find('item:first').find('description').text());
             } else {
-              instance.content('Unable to find more information for ' + title);
+              instance.content('No term listed in glossary');
             }
           });
         }
