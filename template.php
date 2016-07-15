@@ -161,6 +161,7 @@ function afsa_theme_preprocess_node(&$node) {
  * When a creditor meeting node is loaded add javascript that will display the
  * add to calendar links for the node.
  */
+function afsa_theme_preprocess_node__creditor_meeting(&$node) {
   $path = drupal_get_path('theme', 'afsa_theme');
 
   $start_date = strtotime($node['field_event_time'][0]['value']);
