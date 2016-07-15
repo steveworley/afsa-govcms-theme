@@ -131,6 +131,10 @@ function afsa_theme_preprocess_block(&$variables, $hook) {
 }
 // */
 
+
+/**
+ * Implements hook_js_alter().
+ */
 function afsa_theme_js_alter(&$javascript) {
   $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.2.1.4.min.js';
   $javascript['misc/jquery.js']['version'] = '2.1.4';
@@ -138,4 +142,40 @@ function afsa_theme_js_alter(&$javascript) {
   $javascript['misc/ui/jquery.ui.core.min.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery-ui.1.11.4.min.js';
   $javascript['misc/ui/jquery.ui.core.min.js']['version'] = '1.11.4';
 // */
+}
+
+/**
+ * Implements hook_preprocess_node()
+ */
+function afsa_theme_preprocess_node(&$node) {
+  $fn = __FUNCTION__ . "__{$node['type']}";
+
+  if (is_callable($fn)) {
+    $fn($node);
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * When a creditor meeting node is loaded add javascript that will display the
+ * add to calendar links for the node.
+ */
+  $path = drupal_get_path('theme', 'afsa_theme');
+
+  $start_date = strtotime($node['field_event_time'][0]['value']);
+  $end_date = strtotime($node['field_event_time'][0]['value2']);
+
+  // Add javascript to define the calendars.
+  $node['calendar_event'] = array(
+    'atc_title' => "Creditor Meeting: {$node['title']}",
+    'atc_date_start' => date('Y-m-d H:i:s', $start_date),
+    'atc_date_end' => date('Y-m-d H:i:s', $end_date),
+    'atc_location' => $node['field_event_location'][0]['value'],
+    'atc_description' => $node['body'],
+    'atc_timezone' => drupal_get_user_timezone(),
+  );
+
+  drupal_add_js("$path/js/lib/addtocalendar.js");
+  drupal_add_css("$path/css/lib/addtocalendar.css");
 }
