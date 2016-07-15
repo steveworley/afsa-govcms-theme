@@ -759,3 +759,22 @@ tr.selected td {
   background-color: #0072b9;
   background-image: url('../../images/progress.gif');
 }
+/**
+ * Back to top
+ *
+ * @see scrollTop.js
+ */
+.js__scroll_top {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  background: rgb(0, 0, 0);
+  padding: 10px;
+  display: none;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
