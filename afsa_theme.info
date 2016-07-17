@@ -63,14 +63,12 @@ stylesheets[all][] = css/lib/tooltipster.bundle.min.css
 ; conditional stylesheets module: https://drupal.org/project/conditional_styles
 ;stylesheets-conditional[lte IE 8][all][] = css/ie8.css
 
-
-
 ; Optionally add some JavaScripts to your theme.
 
 ;scripts[] = js/script.js
 scripts[] = js/lib/tooltipster.bundle.min.js
 scripts[] = js/tooltips.js
-
+scripts[] = js/scrollTop.js
 
 ; This section lists the regions defined in Zen's default page.tpl.php and
 ; maintenance-page.tpl.php files. The name in brackets is the machine name of

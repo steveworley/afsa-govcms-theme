@@ -34,6 +34,9 @@ function afsa_theme_preprocess_maintenance_page(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("html" in this case.)
  */
+ function ppsr_theme_preprocess_html(&$variables, $hook) {
+  drupal_add_library('system', 'ui.accordion');
+}
 /* -- Delete this line if you want to use this function
 function afsa_theme_preprocess_html(&$variables, $hook) {
   $variables['sample_variable'] = t('Lorem ipsum.');
@@ -131,17 +134,14 @@ function afsa_theme_preprocess_block(&$variables, $hook) {
 }
 // */
 
-
 /**
  * Implements hook_js_alter().
  */
 function afsa_theme_js_alter(&$javascript) {
   $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.2.1.4.min.js';
   $javascript['misc/jquery.js']['version'] = '2.1.4';
-/* --
   $javascript['misc/ui/jquery.ui.core.min.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery-ui.1.11.4.min.js';
   $javascript['misc/ui/jquery.ui.core.min.js']['version'] = '1.11.4';
-// */
 }
 
 /**
