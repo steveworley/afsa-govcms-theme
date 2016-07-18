@@ -147,11 +147,11 @@ function afsa_theme_js_alter(&$javascript) {
 /**
  * Implements hook_preprocess_node()
  */
-function afsa_theme_preprocess_node(&$node) {
-  $fn = __FUNCTION__ . "__{$node['type']}";
+function afsa_theme_preprocess_node(&$vars) {
+  $fn = __FUNCTION__ . "__{$vars['type']}";
 
   if (is_callable($fn)) {
-    $fn($node);
+    $fn($vars);
   }
 }
 
@@ -160,20 +160,34 @@ function afsa_theme_preprocess_node(&$node) {
  *
  * When a creditor meeting node is loaded add javascript that will display the
  * add to calendar links for the node.
+ *
+ * @see http://addtocalendar.com
  */
-function afsa_theme_preprocess_node__creditor_meeting(&$node) {
+function afsa_theme_preprocess_node__creditor_meeting(&$vars) {
   $path = drupal_get_path('theme', 'afsa_theme');
+  $node = $vars['node'];
 
-  $start_date = strtotime($node['field_event_time'][0]['value']);
-  $end_date = strtotime($node['field_event_time'][0]['value2']);
+  $field_name = 'field_event_time';
+  $items = field_get_items('node', $node, $field_name);
+  $field = field_info_field($field_name);
+  $instance = field_info_instance('node', $field_name, $node->type);
+  $display = field_get_display($instance, 'default', $node);
+
+  // Make sure that we have dates available before continuing.
+  if (empty($items)) {
+    return;
+  }
+
+  $date = date_formatter_process('date_default', 'node', $node, $field, $instance, $node->language, $items[0], $display);
 
   // Add javascript to define the calendars.
-  $node['calendar_event'] = array(
-    'atc_title' => "Creditor Meeting: {$node['title']}",
-    'atc_date_start' => date('Y-m-d H:i:s', $start_date),
-    'atc_date_end' => date('Y-m-d H:i:s', $end_date),
-    'atc_location' => $node['field_event_location'][0]['value'],
-    'atc_description' => isset($node['body']) ? $node['body'] : "Creditor meeting for {$node['title']}",
+  $vars['calendar_event'] = array(
+    'atc_title' => "Creditor Meeting: {$vars['title']}",
+    // @see http://php.net/manual/en/function.date.php for date formats.
+    'atc_date_start' => $date['value']['db']['object']->format('Y-m-d H:i:s'),
+    'atc_date_end' => $date['value2']['db']['object']->format('Y-m-d H:i:s'),
+    'atc_location' => $vars['field_event_location'][0]['value'],
+    'atc_description' => !empty($vars['body']) ? $vars['body'] : "Creditor meeting for {$vars['title']}",
     'atc_timezone' => drupal_get_user_timezone(),
   );
 
