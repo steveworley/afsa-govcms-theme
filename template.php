@@ -34,7 +34,7 @@ function afsa_theme_preprocess_maintenance_page(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("html" in this case.)
  */
- function ppsr_theme_preprocess_html(&$variables, $hook) {
+ function afsa_theme_preprocess_html(&$variables, $hook) {
   drupal_add_library('system', 'ui.accordion');
 }
 /* -- Delete this line if you want to use this function
@@ -121,7 +121,7 @@ function afsa_theme_preprocess_region(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-function ppsr_theme_preprocess_search_result(&$vars) {
+function afsa_theme_preprocess_search_result(&$vars) {
   $vars['info'] = $vars['info_split']['date'];
 }
 /* -- Delete this line if you want to use this function
