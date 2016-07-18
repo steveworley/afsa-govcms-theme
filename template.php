@@ -173,7 +173,7 @@ function afsa_theme_preprocess_node__creditor_meeting(&$node) {
     'atc_date_start' => date('Y-m-d H:i:s', $start_date),
     'atc_date_end' => date('Y-m-d H:i:s', $end_date),
     'atc_location' => $node['field_event_location'][0]['value'],
-    'atc_description' => $node['body'],
+    'atc_description' => isset($node['body']) ? $node['body'] : "Creditor meeting for {$node['title']}",
     'atc_timezone' => drupal_get_user_timezone(),
   );
 
