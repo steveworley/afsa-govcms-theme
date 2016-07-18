@@ -140,6 +140,7 @@ function afsa_theme_preprocess_block(&$variables, $hook) {
 function afsa_theme_js_alter(&$javascript) {
   $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.1.8.3.min.js';
   $javascript['misc/jquery.js']['version'] = '1.8.3';
+  
   // $javascript['misc/ui/jquery.ui.core.min.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery-ui.1.11.4.min.js';
   // $javascript['misc/ui/jquery.ui.core.min.js']['version'] = '1.11.4';
 }
