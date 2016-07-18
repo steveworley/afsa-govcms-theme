@@ -114,6 +114,15 @@ function afsa_theme_preprocess_region(&$variables, $hook) {
 // */
 
 /**
+* Process variables for search-result.tpl.php.
+*
+* @see search-result.tpl.php
+*/
+function afsa_theme_preprocess_search_result(&$variables) {
+  // Remove user name and modification date from search results
+  $variables['info'] = '';
+}
+/**
  * Override or insert variables into the block templates.
  *
  * @param $variables
@@ -121,9 +130,6 @@ function afsa_theme_preprocess_region(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("block" in this case.)
  */
-function afsa_theme_preprocess_search_result(&$vars) {
-  $vars['info'] = $vars['info_split']['date'];
-}
 /* -- Delete this line if you want to use this function
 function afsa_theme_preprocess_block(&$variables, $hook) {
   // Add a count to all the blocks in the region.
