@@ -138,10 +138,10 @@ function afsa_theme_preprocess_block(&$variables, $hook) {
  * Implements hook_js_alter().
  */
 function afsa_theme_js_alter(&$javascript) {
-  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.2.1.4.min.js';
-  $javascript['misc/jquery.js']['version'] = '2.1.4';
-  $javascript['misc/ui/jquery.ui.core.min.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery-ui.1.11.4.min.js';
-  $javascript['misc/ui/jquery.ui.core.min.js']['version'] = '1.11.4';
+  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.1.8.3.min.js';
+  $javascript['misc/jquery.js']['version'] = '1.8.3';
+  // $javascript['misc/ui/jquery.ui.core.min.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery-ui.1.11.4.min.js';
+  // $javascript['misc/ui/jquery.ui.core.min.js']['version'] = '1.11.4';
 }
 
 /**
@@ -173,7 +173,7 @@ function afsa_theme_preprocess_node__creditor_meeting(&$node) {
     'atc_date_start' => date('Y-m-d H:i:s', $start_date),
     'atc_date_end' => date('Y-m-d H:i:s', $end_date),
     'atc_location' => $node['field_event_location'][0]['value'],
-    'atc_description' => $node['body'],
+    'atc_description' => isset($node['body']) ? $node['body'] : "Creditor meeting for {$node['title']}",
     'atc_timezone' => drupal_get_user_timezone(),
   );
 
