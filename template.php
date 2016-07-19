@@ -149,7 +149,7 @@ function afsa_theme_preprocess_block(&$variables, $hook) {
 function afsa_theme_js_alter(&$javascript) {
   $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery.1.8.3.min.js';
   $javascript['misc/jquery.js']['version'] = '1.8.3';
-  
+
   // $javascript['misc/ui/jquery.ui.core.min.js']['data'] = drupal_get_path('theme', 'afsa_theme') . '/js/lib/jquery-ui.1.11.4.min.js';
   // $javascript['misc/ui/jquery.ui.core.min.js']['version'] = '1.11.4';
 }
@@ -159,7 +159,6 @@ function afsa_theme_js_alter(&$javascript) {
  */
 function afsa_theme_preprocess_node(&$vars) {
   $fn = __FUNCTION__ . "__{$vars['type']}";
-
   if (is_callable($fn)) {
     $fn($vars);
   }
@@ -203,4 +202,33 @@ function afsa_theme_preprocess_node__creditor_meeting(&$vars) {
 
   drupal_add_js("$path/js/lib/addtocalendar.js");
   drupal_add_css("$path/css/lib/addtocalendar.css");
+}
+
+/**
+ * Implements hook_preprocess_block()
+ */
+function afsa_theme_preprocess_block(&$vars) {
+  $block = $vars['block'];
+  $info = block_block_info();
+
+  if (empty($info[$block->delta])) {
+    return;
+  }
+
+  $info = $info[$block->delta];
+  $class = strtr(drupal_strtolower($info['info']), array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
+  $vars['classes_array'][] = $class;
+
+  $preprocess = __FUNCTION__ . '__' . str_replace('-', '_', $class);
+  if (is_callable($preprocess)) {
+    $preprocess($vars);
+  }
+}
+
+/**
+ * Implements hook_preprocess_block()
+ */
+function afsa_theme_preprocess_block__publication_navigation(&$vars) {
+  $path = drupal_get_path('theme', 'afsa_theme');
+  drupal_add_js($path . '/js/publicationNavigation.js');
 }
