@@ -277,9 +277,10 @@
   }
 }
 
-@media all and (max-width: 479px) {
+@media all and (max-width: 500px) {
   /* Footer blocks for smaller display */
   #footer .block {
     width: 100%;
+    clear: both;
   }
 }
