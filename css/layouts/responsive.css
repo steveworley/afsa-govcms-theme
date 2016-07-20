@@ -63,6 +63,12 @@
   clear: both;
 }
 
+/* Footer blocks on large desktop display. */
+#footer .block {
+    float: left;
+    width: 24.44%;
+}
+
 /* Navigation bar */
 @media all and (min-width: 480px) {
   #main {
@@ -103,6 +109,7 @@
     margin-left: 0%;
     margin-right: -33.33333%;
   }
+
 
   /**
    * The layout when there is only one sidebar, the right one.
@@ -267,5 +274,12 @@
     width: 20%;
     margin-left: 80%;
     margin-right: -100%;
+  }
+}
+
+@media all and (max-width: 479px) {
+  /* Footer blocks for smaller display */
+  #footer .block {
+    width: 100%;
   }
 }
