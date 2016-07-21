@@ -69,6 +69,11 @@
     width: 24.44%;
 }
 
+body:before {
+  content: 'mobile';
+  display: none;
+}
+
 /* Navigation bar */
 @media all and (min-width: 480px) {
   #main {
@@ -89,6 +94,10 @@
  * Use 3 grid columns for smaller screens.
  */
 @media all and (min-width: 480px) and (max-width: 959px) {
+
+  body:before {
+    content: 'tablet';
+  }
 
   /**
    * The layout when there is only one sidebar, the left one.
@@ -207,6 +216,11 @@
  * Use 5 grid columns for larger screens.
  */
 @media all and (min-width: 960px) {
+
+  body:before {
+    content: 'desktop';
+  }
+
 
   /**
    * The layout when there is only one sidebar, the left one.
