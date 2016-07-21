@@ -5,6 +5,9 @@
 
 (function($, Drupal, window, document, undefined) {
 
+  'use strict';
+
+
   Drupal.afsaResponsive = {
 
     actions: {
@@ -38,12 +41,20 @@
 
   Drupal.behaviors.afsaResponsive = {
     attach: function(context, settings) {
-      var breakpoint = Drupal.afsaResponsive.getBreakpoint();
+      if ($('body').hasClass('afsa-responsive')) {
+        return;
+      }
+
+      let breakpoint = Drupal.afsaResponsive.getBreakpoint();
 
       Drupal.afsaResponsive.doActions(breakpoint, context, settings);
 
+      $('body').addClass('afsa-responsive');
       $(window).on('resize', function() {
-        Drupal.afsaResponsive.docActions(Drupal.afsaResponsive.getBreakpoint(), context, settings);
+        if (breakpoint != Drupal.afsaResponsive.getBreakpoint()) {
+          breakpoint = Drupal.afsaResponsive.getBreakpoint();
+          Drupal.afsaResponsive.doActions(breakpoint, context, settings);
+        }
       });
     }
   }

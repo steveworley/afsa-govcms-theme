@@ -6,21 +6,27 @@
 
   'use strict';
 
-  Drupal.afsaResponsive.addAction('mobile', function() {
+  let headerClasses = [
+    'ui-accordion-header',
+    'ui-helper-reset',
+    'ui-state-default',
+    'ui-corner-all'
+  ];
+  let bodyClasses = [
+    'ui-accordion-content',
+    'ui-helper-reset',
+    'ui-widget-content',
+    'ui-corner-bottom'
+  ];
 
+  let resetAccordion = function() {
     let $body = $('article.view-mode-full h2').parent();
-    let headerClasses = [
-      'ui-accordion-header',
-      'ui-helper-reset',
-      'ui-state-default',
-      'ui-corner-all'
-    ];
-    let bodyClasses = [
-      'ui-accordion-content',
-      'ui-helper-reset',
-      'ui-widget-content',
-      'ui-corner-bottom'
-    ];
+    $body.find('.ui-accordion-content').children().first().unwrap();
+    $body.find('h2').removeClass(headerClasses.join(' '));
+  }
+
+  Drupal.afsaResponsive.addAction('mobile', function() {
+    let $body = $('article.view-mode-full h2').parent();
 
     if ($body.length === 0) {
       return;
@@ -39,5 +45,8 @@
         $(this).next('.ui-accordion-content').slideToggle();
       });
   });
+
+  Drupal.afsaResponsive.addAction('tablet', resetAccordion);
+  Drupal.afsaResponsive.addAction('desktop', resetAccordion);
 
 })(jQuery, Drupal, this, this.document);
