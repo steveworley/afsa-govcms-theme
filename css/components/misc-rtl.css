@@ -7,6 +7,10 @@
  * Branding header.
  */
 
+.language-direction-rtl {
+  direction: rtl;
+}
+
 /* Wrapping link for logo. */
 .header__logo {
   float: right;

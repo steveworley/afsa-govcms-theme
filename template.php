@@ -159,6 +159,14 @@ function afsa_theme_js_alter(&$javascript) {
  */
 function afsa_theme_preprocess_node(&$vars) {
   $fn = __FUNCTION__ . "__{$vars['type']}";
+
+  if (isset($vars['field_language_direction']) && $vars['field_language_direction'][0]['value'] == 'rtl') {
+    drupal_add_css(drupal_get_path('theme', 'afsa_theme') . '/css/styles-rtl.css');
+    $vars['classes_array'][] = t('language-direction-!dir', array(
+      '!dir' => $vars['field_language_direction'][0]['value']
+    ));
+  }
+
   if (is_callable($fn)) {
     $fn($vars);
   }
