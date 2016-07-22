@@ -232,3 +232,22 @@ function afsa_theme_preprocess_block__publication_navigation(&$vars) {
   $path = drupal_get_path('theme', 'afsa_theme');
   drupal_add_js($path . '/js/publicationNavigation.js');
 }
+
+/**
+ * Implements theme_file_link().
+ */
+function afsa_theme_file_link(&$vars) {
+  $file = &$vars['file'];
+
+  // Get the filetype from the filename.
+  $filetype = explode('.', $file->filename);
+  $filetype = end($filetype);
+
+  $file->filename = t('!filename [!format !size]', array(
+    '!filename' => $file->filename,
+    '!format' => strtoupper($filetype),
+    '!size' => format_size($file->filesize),
+  ));
+
+  return theme_file_link($vars);
+}
