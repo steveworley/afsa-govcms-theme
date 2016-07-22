@@ -7,12 +7,10 @@
 
 (function($, Drupal, window, document, undefined) {
 
-  'use strict';
-
   Drupal.behaviors.afsa_tooltips = {
     attach: function(context, settings) {
       // Determine the API path.
-      let url = window.location.origin + settings.basePath + 'glossary.xml';
+      var url = window.location.origin + settings.basePath + 'glossary.xml';
 
       $('sup a', context).tooltipster({
         content: 'Loading...',
@@ -22,7 +20,7 @@
         maxWidth: 500,
         updateAnimation: null,
         functionBefore: function(instance, helper) {
-          let $origin = $(helper.origin);
+          var $origin = $(helper.origin);
 
           if ($origin.data('loaded') === true) {
             // Prevent multiple AJAX requests from happening per tooltip.
@@ -31,7 +29,7 @@
 
           // Attempt to match the last part of a URL which will typically
           // relate to a glossary term and use this as the title.
-          let title = $origin.attr('href').split('/').slice(-1)[0];
+          var title = $origin.attr('href').split('/').slice(-1)[0];
           title = title.replace(/-/g, ' ');
 
           if ($origin.attr('name') != '') {
@@ -43,7 +41,7 @@
 
           // Perform an AJAX request to the compiled URL.
           $.get(url + '?title=' + title, function(data) {
-            let $data = $(data);
+            var $data = $(data);
             $origin.data('loaded', true);
 
             if ($data.find('item:first').length > 0) {

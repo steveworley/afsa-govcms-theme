@@ -5,9 +5,6 @@
 
 (function($, Drupal, window, document, undefined) {
 
-  'use strict';
-
-
   Drupal.afsaResponsive = {
 
     actions: {
@@ -45,7 +42,7 @@
         return;
       }
 
-      let breakpoint = Drupal.afsaResponsive.getBreakpoint();
+      var breakpoint = Drupal.afsaResponsive.getBreakpoint();
 
       Drupal.afsaResponsive.doActions(breakpoint, context, settings);
 

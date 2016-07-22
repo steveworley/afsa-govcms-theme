@@ -5,7 +5,6 @@
 
  (function ($, Drupal, window, document, undefined) {
 
-
   // To understand behaviors, see https://drupal.org/node/756722#behaviors
   Drupal.behaviors.scrollTop = {
     attach: function(context, settings) {

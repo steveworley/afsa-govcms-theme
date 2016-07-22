@@ -4,23 +4,21 @@
  */
 (function ($, Drupal, window, document, undefined) {
 
-'use strict';
-
 Drupal.behaviors.publicationNavigation = {
   attach: function(context, settings) {
     $('.node').once('build-nav', function() {
-      let $block = $('.publication-navigation.block');
-      let $list = $('<ul/>');
-      let $li;
+      var $block = $('.publication-navigation.block');
+      var $list = $('<ul/>');
+      var $li;
       // Start at 2 because we are only working with h2 and h3.
-      let depth = 2;
+      var depth = 2;
 
       $block.empty();
       $list.appendTo($block);
 
       $(this).find('h2, h3').each(function(idx) {
-        let $this = $(this);
-        let level = $this.prop('tagName').charAt(1);
+        var $this = $(this);
+        var level = $this.prop('tagName').charAt(1);
 
         $this.before($('<a/>', {'name': 'pub-nav-' + idx}));
 

@@ -4,29 +4,27 @@
  */
  (function($, Drupal, window, document, undefined) {
 
-  'use strict';
-
-  let headerClasses = [
+  var headerClasses = [
     'ui-accordion-header',
     'ui-helper-reset',
     'ui-state-default',
     'ui-corner-all'
   ];
-  let bodyClasses = [
+  var bodyClasses = [
     'ui-accordion-content',
     'ui-helper-reset',
     'ui-widget-content',
     'ui-corner-bottom'
   ];
 
-  let resetAccordion = function() {
-    let $body = $('article.view-mode-full h2').parent();
+  var resetAccordion = function() {
+    var $body = $('article.view-mode-full h2').parent();
     $body.find('.ui-accordion-content').children().first().unwrap();
     $body.find('h2').removeClass(headerClasses.join(' '));
   }
 
   Drupal.afsaResponsive.addAction('mobile', function() {
-    let $body = $('article.view-mode-full h2').parent();
+    var $body = $('article.view-mode-full h2').parent();
 
     if ($body.length === 0) {
       return;
